@@ -49,6 +49,11 @@ export const useTodo = () => {
     const clearCompleted = () => {
         setTodoList((prev) => prev.filter((todo) => !todo.completed));
     };
+
+    const removeTodo = (id: number) => {
+        setTodoList((prev) => prev.filter((todo) => todo.id !== id));
+    };
+
     return {
         
         filteredTodos,
@@ -56,6 +61,7 @@ export const useTodo = () => {
         setFilter,
         addTodo,
         toggleTodoCompleted,
-        clearCompleted
+        clearCompleted,
+        removeTodo
     };
 };

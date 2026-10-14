@@ -8,7 +8,7 @@ import { useTodo } from "./hooks/useTodo";
 
 
 function App() {
-  const { filteredTodos, filter, setFilter, addTodo, toggleTodoCompleted, clearCompleted } = useTodo();
+  const { filteredTodos, filter, setFilter, addTodo, toggleTodoCompleted, clearCompleted, removeTodo } = useTodo();
 
 
 
@@ -19,7 +19,7 @@ function App() {
 
       <TodoForm addTodo={addTodo} />
       <TodoList todoList={filteredTodos} toggleTodoCompleted={toggleTodoCompleted} setFilter={setFilter} filter={filter}
-        clearCompleted={clearCompleted}
+        clearCompleted={clearCompleted} removeTodo={removeTodo}
       />
 
     </TodoContainer>

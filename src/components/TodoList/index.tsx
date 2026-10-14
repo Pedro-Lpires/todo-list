@@ -3,16 +3,18 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import { useContext } from "react";
 import type { Todo } from "../../hooks/useTodo";
 import IconCheck from "/images/icon-check.svg"
+import IconCross from "/images/icon-cross.svg"
 
 interface TodoListProps {
   todoList: Todo[];
   toggleTodoCompleted: (id: number) => void;
+  removeTodo: (id: number) => void;
   setFilter: (filter: "all" | "active" | "completed") => void;
   filter: "all" | "active" | "completed";
   clearCompleted: () => void;
 }
 
-const todoList = ({todoList, toggleTodoCompleted, setFilter, filter, clearCompleted}: TodoListProps) => {
+const TodoList = ({todoList, toggleTodoCompleted, removeTodo, setFilter, filter, clearCompleted}: TodoListProps) => {
 
   const { theme } = useContext(ThemeContext);
   return (
@@ -22,7 +24,7 @@ const todoList = ({todoList, toggleTodoCompleted, setFilter, filter, clearComple
           {
             todoList.map((todo) => (
 
-              <li className={`p-6 border-b ${themeConfig[theme].todo.borderColor} `} key={todo.id}>
+              <li className={`flex items-center justify-between p-6 border-b ${themeConfig[theme].todo.borderColor} `} key={todo.id}>
 
                 <div className="flex items-center gap-4">
 
@@ -37,6 +39,15 @@ const todoList = ({todoList, toggleTodoCompleted, setFilter, filter, clearComple
 
                   <p className={`${themeConfig[theme].todo.textColor} ${todo.completed ? "line-through opacity-50" : ""} `}>{todo.text}</p>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => removeTodo(todo.id)}
+                  aria-label={`Remove task: ${todo.text}`}
+                  className="cursor-pointer"
+                >
+                  <img src={IconCross} alt="" />
+                </button>
 
               </li>
 
@@ -84,4 +95,4 @@ const todoList = ({todoList, toggleTodoCompleted, setFilter, filter, clearComple
   );
 };
 
-export default todoList;
+export default TodoList;
